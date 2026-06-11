@@ -94,7 +94,7 @@
 **第一章 解锁RAG** [📖 查看章节](./docs/chapter1)
 - [x] [RAG简介](./docs/chapter1/01_RAG_intro.md) - RAG技术概述与应用场景
 - [x] [准备工作](./docs/chapter1/02_preparation.md) - 环境配置与准备
-- [x] [四步构建RAG](./docs/chapter1/03_get_start_rag.md) - 快速上手RAG开发
+- [x] [四步构建RAG](./docs/chapter1/03_get_start_rag.md) - 快速上手RAG开发 ✅
 - [x] [附：环境部署](./docs/chapter1/virtualenv.md) - Python虚拟环境部署方案补充 (贡献者: [@anarchysaiko](https://github.com/anarchysaiko))
 
 **第二章 数据准备** [📖 查看章节](./docs/chapter2)
