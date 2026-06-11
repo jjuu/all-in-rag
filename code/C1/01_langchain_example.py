@@ -11,14 +11,19 @@ from langchain_openai import ChatOpenAI
 
 load_dotenv()
 
-markdown_path = "../../data/C1/markdown/easy-rl-chapter1.md"
+# cwd是工程的根目录
+markdown_path = "data/C1/markdown/easy-rl-chapter1.md"
 
 # 加载本地markdown文件
 loader = UnstructuredMarkdownLoader(markdown_path)
 docs = loader.load()
 
 # 文本分块
-text_splitter = RecursiveCharacterTextSplitter()
+# 分块参数说明：code/C1/notes/01_chunk_size和chunk_overlap的作用.md
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,
+    chunk_overlap=100
+)
 chunks = text_splitter.split_documents(docs)
 
 # 中文嵌入模型
@@ -47,13 +52,12 @@ prompt = ChatPromptTemplate.from_template("""请根据下面提供的上下文�
 
 # 配置大语言模型
 
-# 使用 AIHubmix
+# 使用 OpenAI
 llm = ChatOpenAI(
-    model="glm-4.7-flash-free",
+    model="gpt-4o-mini",
     temperature=0.7,
     max_tokens=4096,
-    api_key=os.getenv("DEEPSEEK_API_KEY"),
-    base_url="https://aihubmix.com/v1"
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
 # llm = ChatOpenAI(
@@ -73,3 +77,7 @@ docs_content = "\n\n".join(doc.page_content for doc in retrieved_docs)
 
 answer = llm.invoke(prompt.format(question=question, context=docs_content))
 print(answer)
+
+print("=========================================================================")
+print("Raw Content 👇")
+print(answer.content)
